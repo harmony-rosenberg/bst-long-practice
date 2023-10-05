@@ -1,23 +1,67 @@
 const { BinarySearchTree, TreeNode } = require('./binary-search-tree.js');
-// Before starting, copy and paste your guided practice work into the copy
-// of `binary-search-tree.js` in this folder
-
-// Practice problems on binary trees
 
 function findMinBST (rootNode) {
-  // Your code here
+
+  // if(!rootNode.left) {
+  //   return rootNode.val
+  // } else {
+  //   return findMinBST(rootNode.left)
+  // }
+
+  if(!rootNode) return;
+  while(rootNode.left) {
+    rootNode = rootNode.left
+  }
+  return rootNode.val
 }
 
 function findMaxBST (rootNode) {
-  // Your code here
+  // if(!rootNode.right) {
+  //   return rootNode.val
+  // } else {
+  //   return findMaxBST(rootNode.right)
+  // }
+
+  if(!rootNode) return;
+  while(rootNode.right) {
+    rootNode = rootNode.right
+  }
+  return rootNode.val
 }
 
 function findMinBT (rootNode) {
-  // Your code here
+  if(!rootNode) return null
+
+  let minNodeVal = rootNode.val
+  let leftMin = findMinBT(rootNode.left)
+  let rightMin = findMinBT(rootNode.right)
+
+  if(leftMin && leftMin < minNodeVal) {
+    minNodeVal = leftMin
+  }
+
+  if(rightMin && rightMin < minNodeVal) {
+  minNodeVal = rightMin
+  }
+
+  return minNodeVal
 }
 
 function findMaxBT (rootNode) {
-  // Your code here
+  if(!rootNode) return;
+
+  let maxNodeVal = rootNode.val
+  let leftMax = findMaxBT(rootNode.left)
+  let rightMax = findMaxBT(rootNode.right)
+
+  if(leftMax && leftMax > maxNodeVal) {
+    maxNodeVal = leftMax
+  }
+
+  if(rightMax && rightMax > maxNodeVal) {
+    maxNodeVal = rightMax
+  }
+  return maxNodeVal
 }
 
 function getHeight (rootNode) {
@@ -55,7 +99,7 @@ function deleteNodeBST(rootNode, target) {
 
   // Case 2: Two children:
   //  Set the value to its in-order predecessor, then delete the predecessor
-  //  Replace target node with the left most child on its right side, 
+  //  Replace target node with the left most child on its right side,
   //  or the right most child on its left side.
   //  Then delete the child that it was replaced with.
 
