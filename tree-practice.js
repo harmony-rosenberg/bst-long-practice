@@ -77,7 +77,27 @@ function getHeight (rootNode) {
 }
 
 function balancedTree (rootNode) {
-  // Your code here
+  if (!rootNode) return true
+  if(!rootNode.left && !rootNode.right) return true
+
+  let leftHeight = getHeight(rootNode.left)
+  let rightHeight = getHeight(rootNode.right)
+  let difference = leftHeight - rightHeight
+
+  console.log(difference)
+
+  if(difference > 1) return false
+  if(difference < -1) return false
+
+  if(rootNode.left){
+    return balancedTree(rootNode.left)
+  }
+
+  if(rootNode.right){
+    return balancedTree(rootNode.right);
+  }
+
+  return balancedTree(rootNode)
 }
 
 function countNodes (rootNode) {
